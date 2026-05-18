@@ -6,6 +6,14 @@
         http://www.springframework.org/schema/webflow/spring-webflow-2.4.xsd"
       start-state="home">
 
-    <view-state id="home" view="home"/>
 
+
+    <view-state id="home" view="home">
+        <on-render>
+            <evaluate expression="statistiqueformaction.setupForm" result="flowScope.StatistiquesForm" />
+        </on-render>
+
+    </view-state>
+
+    <bean-import resource="simple-flow-beans.xml" />
 </flow>

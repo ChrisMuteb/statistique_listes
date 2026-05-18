@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="statistiqueformaction" class="com.example.webflow.action.StatistiqueFormAction">
+        <property name="formObjectName" value="statistiqueform" />
+        <property name="formObjectClass" value="com.example.webflow.model.StatistiquesForm" />
+        <property name="formObjectScope" value="FLOW" />
+        <property name="formErrorsScope" value="REQUEST" />
+    </bean>
+
+<!--    <bean id="formValidator" class="com.example.webflow.validator.StatistiquesValidator"/>-->
+</beans>
