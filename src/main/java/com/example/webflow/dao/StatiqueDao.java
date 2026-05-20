@@ -11,4 +11,5 @@ public interface StatiqueDao {
 
     // ADD THIS METHOD
     void insertDemandeFichier(DemandeFichier demande);
+    List<Object[]> getListOfDemandesFichiers();
 }

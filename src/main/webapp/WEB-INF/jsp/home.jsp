@@ -126,104 +126,70 @@
             </div>
         </div>
 
-        <div class="table-responsive">
-            <table class="table table-hover align-middle border-top border-secondary-subtle custom-dashboard-table" style="font-size: 0.9rem;">
-                <thead class="table-light text-secondary">
-                    <tr>
-                        <th scope="col" class="fw-bold py-3">Application</th>
-                        <th scope="col" class="fw-bold py-3">Département</th>
-                        <th scope="col" class="fw-bold py-3">Requête</th>
-                        <th scope="col" class="fw-bold py-3">Date de demande</th>
-                        <th scope="col" class="fw-bold py-3">Date d'expiration</th>
-                        <th scope="col" class="fw-bold py-3">Statut</th>
-                        <th scope="col" class="fw-bold py-3 text-center">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-3">SURF</td>
-                        <td>974 - La Réunion</td>
-                        <td>Fiches en anomalie</td>
-                        <td>15/04/2025 13:42</td>
-                        <td class="text-muted">—</td>
-                        <td>
-                            <span class="badge d-inline-flex align-items-center gap-1 border px-2 py-1.5 rounded-1"
-                                  style="background-color: #fff9ec; border-color: #ffe8c4 !important; color: #d97706; font-weight: 500;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
-                                    <path d="M8 4.75a.75.75 0 0 0-.75.75v1.5a.75.75 0 0 0 1.5 0V5.5a.75.75 0 0 0-.75-.75M8 11.25a.75.75 0 0 0-.75.75v.5a.75.75 0 0 0 1.5 0v-.5a.75.75 0 0 0-.75-.75M12.5 8a.75.75 0 0 0-.75-.75h-.5a.75.75 0 0 0 0 1.5h.5A.75.75 0 0 0 12.5 8M4.75 8a.75.75 0 0 0-.75-.75h-.5a.75.75 0 0 0 0 1.5h.5A.75.75 0 0 0 4.75 8"/>
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
-                                </svg>
-                                En cours
-                            </span>
-                        </td>
-                        <td class="text-center text-muted">—</td>
-                    </tr>
+        <!-- Historical Requests Container -->
+        <div class="card shadow-sm border-secondary-subtle mb-4">
+            <div class="card-header bg-light fw-bold text-dark py-3">
+                Historique de vos demandes de fichiers
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light text-secondary small text-uppercase">
+                            <tr>
+                                <th class="ps-4">ID</th>
+                                <th>Application</th>
+                                <th>Département</th>
+                                <th>Type Requête</th>
+                                <th>Date Demande</th>
+                                <th>Date Expiration</th>
+                                <th class="pe-4">Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody class="small">
+                            <!-- Check if historical lists are empty -->
+                            <c:if test="${empty historiqueDemandesList}">
+                                <tr>
+                                    <td colspan="7" class="text-center text-muted py-4">
+                                        Aucune demande n'a été enregistrée pour le moment.
+                                    </td>
+                                </tr>
+                            </c:if>
 
-                    <tr>
-                        <td class="py-3">Gestion TU</td>
-                        <td>974 - La Réunion</td>
-                        <td>Dossiers TU</td>
-                        <td>14/04/2025 10:22</td>
-                        <td class="text-muted">—</td>
-                        <td>
-                            <span class="badge d-inline-flex align-items-center gap-1 border px-2 py-1.5 rounded-1"
-                                  style="background-color: #fff9ec; border-color: #ffe8c4 !important; color: #d97706; font-weight: 500;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
-                                </svg>
-                                En cours
-                            </span>
-                        </td>
-                        <td class="text-center text-muted">—</td>
-                    </tr>
-
-                    <tr>
-                        <td class="py-3">EVALOC</td>
-                        <td>974 - La Réunion</td>
-                        <td>Déclarations à traiter</td>
-                        <td>13/04/2025 09:21</td>
-                        <td>13/05/2025</td>
-                        <td>
-                            <span class="badge d-inline-flex align-items-center gap-1 border px-2 py-1.5 rounded-1"
-                                  style="background-color: #ecfdf5; border-color: #d1fae5 !important; color: #059669; font-weight: 500;">
-                                Disponible
-                            </span>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-sm btn-white border border-dark-subtle fw-bold text-dark px-3 py-1.5 d-inline-flex align-items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-                                </svg>
-                                Télécharger
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td class="py-3">SURF</td>
-                        <td>974 - La Réunion</td>
-                        <td>Fiches en évaluation d'office</td>
-                        <td>12/04/2025 11:48</td>
-                        <td>12/05/2025</td>
-                        <td>
-                            <span class="badge d-inline-flex align-items-center gap-1 border px-2 py-1.5 rounded-1"
-                                  style="background-color: #ecfdf5; border-color: #d1fae5 !important; color: #059669; font-weight: 500;">
-                                Disponible
-                            </span>
-                        </td>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-sm btn-white border border-dark-subtle fw-bold text-dark px-3 py-1.5 d-inline-flex align-items-center gap-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
-                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
-                                </svg>
-                                Télécharger
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            <!-- Loop through DTO items -->
+                            <c:forEach var="demande" items="${historiqueDemandesList}">
+                                <tr>
+                                    <td class="ps-4 text-muted fw-mono">#${demande.idDemandeFichier}</td>
+                                    <td class="fw-bold"><c:out value="${demande.application}"/></td>
+                                    <td><c:out value="${demande.departement}"/></td>
+                                    <td><c:out value="${demande.requetes}"/></td>
+                                    <td><c:out value="${demande.dtDemande}"/></td>
+                                    <td><c:out value="${demande.dtExpiration}"/></td>
+                                    <td class="pe-4">
+                                        <!-- Render badge contextual colors depending on status variable values -->
+                                        <c:choose>
+                                            <c:when test="${demande.statutCsv == 'DISPONIBLE'}">
+                                                <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill">
+                                                    <c:out value="${demande.statutCsv}"/>
+                                                </span>
+                                            </c:when>
+                                            <c:when test="${demande.statutCsv == 'EXPIRE'}">
+                                                <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2.5 py-1.5 rounded-pill">
+                                                    <c:out value="${demande.statutCsv}"/>
+                                                </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="badge bg-warning-subtle text-warning-dark border border-warning-subtle px-2.5 py-1.5 rounded-pill" style="color: #856404; background-color: #fff3cd;">
+                                                    <c:out value="${demande.statutCsv}"/>
+                                                </span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div class="d-flex justify-content-center mt-4">

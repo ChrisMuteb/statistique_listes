@@ -1,5 +1,6 @@
 package com.example.webflow.action;
 
+import com.example.webflow.model.DemandeFichier;
 import com.example.webflow.model.StatistiquesForm;
 import com.example.webflow.model.dto.ApplicationDto;
 import com.example.webflow.model.dto.DepartementDto;
@@ -26,10 +27,16 @@ public class StatistiqueFormAction extends FormAction {
         List<DepartementDto> departements = statiqueService.getListOfDept();
         List<TypeRequeteDto> typeRequetes = statiqueService.getListOfTypeRequete();
 
+        // 2. Fetch the newly saved file records directly out of our persistence service layer
+        List<DemandeFichier> listDemandes = statiqueService.getAllDemandesForDisplay();
+
         // Pass it to the view scope / flow scope
         context.getFlowScope().put("applicationsList", applications);
         context.getFlowScope().put("departementsList", departements);
         context.getFlowScope().put("typeRequeteList", typeRequetes);
+
+        // This key "historiqueDemandesList" matches the items looping property inside your JSP template
+        context.getFlowScope().put("historiqueDemandesList", listDemandes);
 
         bind(context);
         return super.setupForm(context);

@@ -90,4 +90,21 @@ public class StatiqueDaoImpl extends BaseDaoJpaImpl implements StatiqueDao {
             throw new RuntimeException("Erreur lors de l'insertion dans demandefichiers", exception);
         }
     }
+
+    @Override
+    public List<Object[]> getListOfDemandesFichiers() {
+        List<Object[]> list = null;
+        try {
+            // Simple query string selecting data in the exact order we want to map it
+            String sql = "SELECT iddemandefichier, application, departement, requetes, dtdemande, dtexpiration, statutcsv " +
+                    "FROM demandefichiers ORDER BY dtdemande DESC";
+
+            Query query = entityManager.createNativeQuery(sql);
+            list = query.getResultList();
+        }
+        catch (Exception exception) {
+            // Log your error here depending on your logger configuration
+        }
+        return list;
+    }
 }

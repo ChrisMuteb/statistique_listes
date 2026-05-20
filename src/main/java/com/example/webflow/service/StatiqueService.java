@@ -1,5 +1,6 @@
 package com.example.webflow.service;
 
+import com.example.webflow.model.DemandeFichier;
 import com.example.webflow.model.StatistiquesForm;
 import com.example.webflow.model.dto.ApplicationDto;
 import com.example.webflow.model.dto.DepartementDto;
@@ -12,4 +13,5 @@ public interface StatiqueService {
     List<DepartementDto> getListOfDept();
     List<TypeRequeteDto> getListOfTypeRequete();
     void saveDemandeFichier(StatistiquesForm form);
+    List<DemandeFichier> getAllDemandesForDisplay();
 }
