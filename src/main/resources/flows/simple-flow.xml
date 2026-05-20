@@ -10,9 +10,20 @@
 
     <view-state id="home" view="home">
         <on-render>
-            <evaluate expression="statistiqueformaction.setupForm" result="flowScope.StatistiquesForm" />
+            <evaluate expression="statistiqueformaction.setupForm" result="flowScope.statistiqueform" />
         </on-render>
+        <transition on="submit" to="soumettre" />
 
+    </view-state>
+
+    <action-state id="soumettre">
+        <evaluate expression="statistiqueformaction.soumettre" result="flowScope.statistiqueform" />
+        <transition on="success" to="home" />
+        <transition on="error" to="homeinit.view" />
+    </action-state>
+
+    <view-state id="homeinit.view" view="home" >
+        <transition on="submit" to="soumettre" />
     </view-state>
 
     <bean-import resource="simple-flow-beans.xml" />

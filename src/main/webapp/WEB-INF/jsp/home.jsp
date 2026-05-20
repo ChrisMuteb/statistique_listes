@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,53 +25,48 @@
             Vous recevrez un email dès que le fichier généré sera disponible au téléchargement.
         </p>
 
-        <form action="${flowExecutionUrl}" method="post" class="needs-validation" novalidate>
+        <!-- Note the modelAttribute corresponds to the lowercase name configured in simple-flow-beans.xml -->
+        <form:form action="${flowExecutionUrl}" modelAttribute="statistiqueform" method="post" class="needs-validation" novalidate="novalidate">
             <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
 
             <div class="row g-3 mb-4">
                 <!-- DYNAMIC APPLICATION DROPDOWN -->
                 <div class="col-md-4">
                     <label for="application" class="form-label fw-bold small">Application <span class="text-danger">*</span></label>
-                    <!-- Loop through the Application objects placed in flowScope by the FormAction -->
-                    <select class="form-select bg-white border-secondary-subtle" id="application" name="application" required>
+                    <form:select class="form-select bg-white border-secondary-subtle" id="application" path="application" required="required">
                         <option value="">-- Choisir --</option>
                         <c:forEach var="app" items="${applicationsList}">
-                            <option value="${app.code}">
-                                <c:out value="${app.libelle}" />
-                            </option>
+                            <option value="${app.libelle}">${app.libelle}</option>
                         </c:forEach>
-                    </select>
+                    </form:select>
+                    <!-- Displays the error mapping if validation fails -->
+                    <form:errors path="application" cssClass="text-danger small d-block mt-1" />
                 </div>
 
                 <!-- DYNAMIC DEPARTEMENT DROPDOWN -->
                 <div class="col-md-4">
                     <label for="departement" class="form-label fw-bold small">Département <span class="text-danger">*</span></label>
-                    <select class="form-select bg-white border-secondary-subtle" id="departement" name="departement" required>
+                    <form:select class="form-select bg-white border-secondary-subtle" id="departement" path="departement" required="required">
                         <option value="">-- Choisir --</option>
-
-                        <!-- Loop through the Departement objects placed in flowScope by the FormAction -->
                         <c:forEach var="dept" items="${departementsList}">
-                            <option value="${dept.code}">
-                                <c:out value="${dept.libelle}" />
-                            </option>
+                            <option value="${dept.libelle}">${dept.libelle}</option>
                         </c:forEach>
-
-                    </select>
+                    </form:select>
+                    <!-- Displays the error mapping if validation fails -->
+                    <form:errors path="departement" cssClass="text-danger small d-block mt-1" />
                 </div>
 
                 <!-- DYNAMIC TYPE REQUETE DROPDOWN -->
                 <div class="col-md-4">
                     <label for="typeRequete" class="form-label fw-bold small">Type de requête <span class="text-danger">*</span></label>
-                    <select class="form-select bg-white border-secondary-subtle" id="typeRequete" name="typeRequete" required>
+                    <form:select class="form-select bg-white border-secondary-subtle" id="typeRequete" path="typeRequete" required="required">
                         <option value="">-- Choisir --</option>
-
-                        <!-- Loop through the Departement objects placed in flowScope by the FormAction -->
                         <c:forEach var="treqt" items="${typeRequeteList}">
-                            <option value="${treqt.id}">
-                                <c:out value="${treqt.libelle}" />
-                            </option>
+                            <option value="${treqt.libelle}">${treqt.libelle}</option>
                         </c:forEach>
-                    </select>
+                    </form:select>
+                    <!-- Displays the error mapping if validation fails -->
+                    <form:errors path="typeRequete" cssClass="text-danger small d-block mt-1" />
                 </div>
             </div>
 
@@ -78,23 +74,10 @@
                 <div class="col-md-4">
                     <label for="email" class="form-label fw-bold small">Email de réception <span class="text-danger">*</span></label>
                     <div class="input-group">
-                        <span class="input-group-text bg-white border-secondary-subtle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="text-muted" viewBox="0 0 16 16">
-                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383z"/>
-                            </svg>
-                        </span>
-                        <input type="email" class="form-control border-secondary-subtle" id="email" name="email" placeholder="adresse@email.fr" required>
+                        <span class="input-group-text bg-white border-secondary-subtle">@</span>
+                        <form:input type="email" class="form-control border-secondary-subtle" id="email" path="email" placeholder="adresse@email.fr" required="required" />
                     </div>
-                </div>
-
-                <div class="col-md-8">
-                    <div class="d-flex align-items-center text-secondary small pb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-2 flex-shrink-0" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                            <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-                        </svg>
-                        <span>Vous recevrez un email dès que le fichier sera disponible</span>
-                    </div>
+                    <form:errors path="email" cssClass="text-danger small d-block mt-1" />
                 </div>
             </div>
 
@@ -103,19 +86,21 @@
                     Soumettre
                 </button>
             </div>
-        </form>
+        </form:form>
 
-        <div class="border border-success rounded p-3 d-flex align-items-center" style="background-color: #f4faf6;">
-            <div class="text-success me-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                </svg>
+        <c:if test="${submitSuccess}">
+            <div class="border border-success rounded p-3 d-flex align-items-center mb-4" style="background-color: #f4faf6;">
+                <div class="text-success me-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>
+                </div>
+                <div>
+                    <div class="fw-bold text-success" style="font-size: 0.95rem;">Votre demande a été prise en compte.</div>
+                    <div class="text-secondary small">Le fichier sera disponible après traitement.</div>
+                </div>
             </div>
-            <div>
-                <div class="fw-bold text-success" style="font-size: 0.95rem;">Votre demande a été prise en compte.</div>
-                <div class="text-secondary small">Le fichier sera disponible après traitement.</div>
-            </div>
-        </div>
+        </c:if>
 
         <hr class="text-muted my-5">
 

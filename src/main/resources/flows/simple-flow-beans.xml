@@ -9,7 +9,11 @@
         <property name="formObjectClass" value="com.example.webflow.model.StatistiquesForm" />
         <property name="formObjectScope" value="FLOW" />
         <property name="formErrorsScope" value="REQUEST" />
+
+        <property name="validator">
+            <ref bean="statistiquesValidator.validator" />
+        </property>
     </bean>
 
-<!--    <bean id="formValidator" class="com.example.webflow.validator.StatistiquesValidator"/>-->
+    <bean id="statistiquesValidator.validator" class="com.example.webflow.validator.StatistiquesValidator"/>
 </beans>

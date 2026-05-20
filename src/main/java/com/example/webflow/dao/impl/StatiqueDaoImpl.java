@@ -2,6 +2,7 @@ package com.example.webflow.dao.impl;
 
 import com.example.webflow.dao.StatiqueDao;
 import com.example.webflow.dao.helper.RequeteHelper;
+import com.example.webflow.model.DemandeFichier;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
@@ -63,5 +64,30 @@ public class StatiqueDaoImpl extends BaseDaoJpaImpl implements StatiqueDao {
         }
 
         return list;
+    }
+
+    @Override
+    public void insertDemandeFichier(DemandeFichier demande) {
+        try {
+            // 1. Create native query from your RequeteHelper SQL string
+            Query query = entityManager.createNativeQuery(RequeteHelper.REQ_INSERT_DEMANDE_FICHIER);
+
+            // 2. Bind parameters in the exact order of your SQL statement placeholder tokens (?)
+            query.setParameter(1, demande.getIdDemandeFichier());
+            query.setParameter(2, demande.getApplication());
+            query.setParameter(3, demande.getDepartement());
+            query.setParameter(4, demande.getRequetes());
+            query.setParameter(5, demande.getDtDemande());
+            query.setParameter(6, demande.getDtExpiration());
+            query.setParameter(7, demande.getStatutCsv());
+
+            // 3. Execute the SQL insertion statement
+            query.executeUpdate();
+        }
+        catch (Exception exception) {
+            // Clean Code reminder: Never swallow exceptions completely in production.
+            // Throw it upwards so the transaction can safely rollback if it fails.
+            throw new RuntimeException("Erreur lors de l'insertion dans demandefichiers", exception);
+        }
     }
 }

@@ -10,4 +10,7 @@ public class RequeteHelper {
 
     public static final String REQ_LIST_OF_TYPE_REQUETE =
             "SELECT id, libelle FROM ref_type_requete";
+
+    public static final String REQ_INSERT_DEMANDE_FICHIER =
+            "INSERT INTO demandefichiers(iddemandefichier, application,departement, requetes, dtdemande,dtexpiration,statutcsv) values(?,?,?,?,?,?,?)";
 }
