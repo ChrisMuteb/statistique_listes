@@ -9,13 +9,13 @@ public class IdGenerator {
     /**
      * Generates a unique, positive numerical identifier bounded for SQL INT/BIGINT columns.
      */
-    public static int generateUniqueNumericId() {
+    public static long generateUniqueNumericId() {
         UUID uuid = UUID.randomUUID();
 
-        // Use the Least Significant Bits of the UUID, extract its hash code
-        int uniqueId = uuid.hashCode();
+        // XOR the upper 64 bits and lower 64 bits of the UUID to squeeze maximum entropy
+        long uniqueLong = uuid.getMostSignificantBits() ^ uuid.getLeastSignificantBits();
 
-        // Ensure the ID is strictly positive (Bitwise AND clears the sign bit)
-        return uniqueId & Integer.MAX_VALUE;
+        // Bitwise AND with Long.MAX_VALUE clears the sign bit, making it strictly positive
+        return uniqueLong & Long.MAX_VALUE;
     }
 }

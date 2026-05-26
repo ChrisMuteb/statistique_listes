@@ -13,6 +13,22 @@
 <body class="bg-light">
 
     <div class="container my-4">
+
+        <div class="row g-3 mb-5">
+            <div class="col-sm-6">
+                <a href="${flowExecutionUrl}&_eventId=generationListes" class="btn w-100 py-3 text-white fw-bold text-uppercase rounded-1 shadow-sm d-flex align-items-center justify-content-center"
+                   style="background-color: #82475d; letter-spacing: 0.5px; font-size: 1.05rem; min-height: 65px; border: none; transition: opacity 0.2s;">
+                    Génération des listes
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <a href="${flowExecutionUrl}&_eventId=gestionRequetes" class="btn w-100 py-3 text-white fw-bold text-uppercase rounded-1 shadow-sm d-flex align-items-center justify-content-center"
+                   style="background-color: #82475d; letter-spacing: 0.5px; font-size: 1.05rem; min-height: 65px; border: none; transition: opacity 0.2s;">
+                    Gestion des requêtes
+                </a>
+            </div>
+        </div>
+
         <div class="d-flex align-items-center mb-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#bc4c2b" class="me-2" viewBox="0 0 16 16">
                 <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zm-4 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1zm-4 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/>

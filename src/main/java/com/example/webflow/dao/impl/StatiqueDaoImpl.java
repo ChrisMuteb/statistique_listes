@@ -55,7 +55,7 @@ public class StatiqueDaoImpl extends BaseDaoJpaImpl implements StatiqueDao {
         try {
             // Using the static script defined in RequeteHelper
             Query query = entityManager
-                    .createNativeQuery(RequeteHelper.REQ_LIST_OF_TYPE_REQUETE);
+                    .createNativeQuery(RequeteHelper.REQ_LIST_OF_REQUETE);
 
             list = query.getResultList();
         }

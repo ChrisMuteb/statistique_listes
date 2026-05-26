@@ -6,10 +6,10 @@ public class RequeteHelper {
             "SELECT code, libelle FROM ref_departement";
 
     public static final String REQ_LIST_OF_APPLICATION =
-            "SELECT code, libelle FROM ref_application";
+            "SELECT idapplication, libapplication FROM application";
 
-    public static final String REQ_LIST_OF_TYPE_REQUETE =
-            "SELECT id, libelle FROM ref_type_requete";
+    public static final String REQ_LIST_OF_REQUETE =
+            "SELECT idrequete, idapplication, librequete, dtdeb, dtfin FROM requete";
 
     public static final String REQ_INSERT_DEMANDE_FICHIER =
             "INSERT INTO demandefichiers(iddemandefichier, application,departement, requetes, dtdemande,dtexpiration,statutcsv) values(?,?,?,?,?,?,?)";

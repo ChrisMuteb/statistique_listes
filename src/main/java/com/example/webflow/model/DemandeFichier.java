@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 public class DemandeFichier implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Integer idDemandeFichier;
+    private long idDemandeFichier;
     private String application;
     private String departement;
     private String requetes;
@@ -15,8 +15,8 @@ public class DemandeFichier implements Serializable {
     private String statutCsv;
 
     // Getters and Setters
-    public Integer getIdDemandeFichier() { return idDemandeFichier; }
-    public void setIdDemandeFichier(Integer idDemandeFichier) { this.idDemandeFichier = idDemandeFichier; }
+    public long getIdDemandeFichier() { return idDemandeFichier; }
+    public void setIdDemandeFichier(long idDemandeFichier) { this.idDemandeFichier = idDemandeFichier; }
 
     public String getApplication() { return application; }
     public void setApplication(String application) { this.application = application; }

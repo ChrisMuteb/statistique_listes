@@ -33,11 +33,17 @@ public class StatiqueServiceImpl implements StatiqueService {
 
         if (rawList != null) {
             for (Object[] row : rawList) {
-                // row[0] is code, row[1] is libelle from your SQL script
-                String code = row[0] != null ? row[0].toString() : "";
-                String libelle = row[1] != null ? row[1].toString() : "";
 
-                appList.add(new ApplicationDto(code, libelle));
+                // FIX 1 & 2: Safe numerical conversion. If null, we assign null safely to the Integer object.
+                Integer idApplication = null;
+                if (row[0] != null) {
+                    idApplication = ((Number) row[0]).intValue();
+                }
+
+                // Safe String assignment
+                String libApplication = row[1] != null ? row[1].toString() : "";
+
+                appList.add(new ApplicationDto(idApplication, libApplication));
             }
         }
 
@@ -67,17 +73,33 @@ public class StatiqueServiceImpl implements StatiqueService {
     @Override
     @Transactional(readOnly = true)
     public List<TypeRequeteDto> getListOfTypeRequete() {
-        // 1. Get raw rows from DAO
+        // 1. Get raw database rows from your DAO layer selection query
         List<Object[]> rawList = statiqueDao.getListOfTypeRequete();
         List<TypeRequeteDto> typeRequeteList = new ArrayList<>();
 
         if (rawList != null) {
             for (Object[] row : rawList) {
-                // row[0] is code, row[1] is libelle from your SQL script
-                String code = row[0] != null ? row[0].toString() : "";
-                String libelle = row[1] != null ? row[1].toString() : "";
 
-                typeRequeteList.add(new TypeRequeteDto( code, libelle));
+                // Column 0: idrequete (INTEGER)
+                Integer idRequete = row[0] != null ? ((Number) row[0]).intValue() : null;
+
+                // Column 1: idapplication (INTEGER)
+                Integer idApplication = row[1] != null ? ((Number) row[1]).intValue() : null;
+
+                // Column 2: librequete (VARCHAR)
+                String libRequete = row[2] != null ? row[2].toString() : "";
+
+                // Column 3: requete (TEXT)
+                String requete = row[3] != null ? row[3].toString() : "";
+
+                // Column 4: dtdeb (TIMESTAMP)
+                Timestamp dtDeb = row[4] != null ? (Timestamp) row[4] : null;
+
+                // Column 5: dtfin (TIMESTAMP)
+                Timestamp dtFin = row[5] != null ? (Timestamp) row[5] : null;
+
+                // Instantiate and add the completely populated DTO record
+                typeRequeteList.add(new TypeRequeteDto(idRequete, idApplication, libRequete, requete, dtDeb, dtFin));
             }
         }
 

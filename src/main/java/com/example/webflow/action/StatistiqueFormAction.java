@@ -74,4 +74,19 @@ public class StatistiqueFormAction extends FormAction {
         }
 
     }
+
+    public Event chargerGestionRequetes(RequestContext context) throws Exception {
+        try {
+            // 1. Fetch the data specific to the "Gestion des requêtes" tab
+            // (We will write this service method next)
+            List<GestionRequeteDto> requetesList = statiqueService.getRequetesDisponibles();
+
+            // 2. Put it into the flowScope so gestionRequetes.jsp can read it
+            context.getFlowScope().put("requetesDisponiblesList", requetesList);
+
+            return success();
+        } catch (Exception e) {
+            // System logging fallback
+            return error();
+        }
 }

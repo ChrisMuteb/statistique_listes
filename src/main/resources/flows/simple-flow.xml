@@ -13,6 +13,8 @@
             <evaluate expression="statistiqueformaction.setupForm" result="flowScope.statistiqueform" />
         </on-render>
         <transition on="submit" to="soumettre" />
+        <transition on="generationListes" to="home" />
+        <transition on="gestionRequetes" to="gestionRequetesState" />
 
     </view-state>
 
@@ -24,6 +26,17 @@
 
     <view-state id="homeinit.view" view="home" >
         <transition on="submit" to="soumettre" />
+    </view-state>
+
+    <view-state id="gestionRequetesState" view="gestionrequete">
+        <on-render>
+            <evaluate expression="statistiqueFormAction.chargerGestionRequetes" />
+        </on-render>
+
+        <transition on="generationListes" to="home" />
+
+        <transition on="consulter" to="consulterAction" />
+        <transition on="modifier" to="modifierAction" />
     </view-state>
 
     <bean-import resource="simple-flow-beans.xml" />
